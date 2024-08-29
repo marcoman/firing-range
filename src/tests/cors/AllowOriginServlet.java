@@ -17,6 +17,7 @@ import com.google.testing.security.firingrange.utils.Escaper;
 import com.google.testing.security.firingrange.utils.Requests;
 import com.google.testing.security.firingrange.utils.Responses;
 import com.google.testing.security.firingrange.utils.Templates;
+import io.github.pixee.security.Newlines;
 import java.io.IOException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +45,7 @@ abstract class AllowOriginServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String origin = request.getHeader("Origin");
     if (origin != null) {
-      response.setHeader("Access-Control-Allow-Origin", getAllowOriginValue(request));
+      response.setHeader("Access-Control-Allow-Origin", Newlines.stripAll(getAllowOriginValue(request)));
       response.setHeader("Access-Control-Allow-Credentials", "true");
     }
     Responses.sendNormalPage(response, "Got it!");

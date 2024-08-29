@@ -16,6 +16,7 @@ package com.google.testing.security.firingrange.utils;
 
 import com.google.common.base.Preconditions;
 import com.google.common.net.HttpHeaders;
+import io.github.pixee.security.Newlines;
 
 import java.io.IOException;
 
@@ -74,7 +75,7 @@ public final class Responses {
     response.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate");
     response.setHeader(HttpHeaders.PRAGMA, "no-cache");
     response.setDateHeader(HttpHeaders.EXPIRES, 0);
-    response.setHeader(HttpHeaders.CONTENT_TYPE, contentType);
+    response.setHeader(HttpHeaders.CONTENT_TYPE, Newlines.stripAll(contentType));
     response.setStatus(status);
     response.getWriter().write(body);
   }
@@ -108,6 +109,6 @@ public final class Responses {
    */
   public static void sendRedirect(HttpServletResponse response, String location) {
     response.setStatus(302);
-    response.setHeader(HttpHeaders.LOCATION, location);
+    response.setHeader(HttpHeaders.LOCATION, Newlines.stripAll(location));
   }
 }

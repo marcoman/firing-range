@@ -20,6 +20,7 @@ import com.google.common.base.Strings;
 import com.google.common.net.HttpHeaders;
 import com.google.testing.security.firingrange.utils.Responses;
 import com.google.testing.security.firingrange.utils.Templates;
+import io.github.pixee.security.Newlines;
 
 import java.io.IOException;
 import java.util.List;
@@ -68,7 +69,7 @@ public class UniversalReverseClickjackingMultiPage extends HttpServlet {
 
     // Send the appropriate X-Frame-Options header
     void sendXfoHeader(HttpServletResponse response) {
-      response.setHeader(HttpHeaders.X_FRAME_OPTIONS, directive);
+      response.setHeader(HttpHeaders.X_FRAME_OPTIONS, Newlines.stripAll(directive));
     }
   }
 
