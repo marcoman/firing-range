@@ -19,6 +19,7 @@ import com.google.common.net.HttpHeaders;
 import com.google.testing.security.firingrange.utils.Responses;
 import com.google.testing.security.firingrange.utils.Templates;
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Optional;
 import java.util.Random;
@@ -79,7 +80,7 @@ public class LeakedHttpOnlyCookie extends HttpServlet {
   }
 
   private String createRandomString() {
-    Random random = new Random();
+    Random random = new SecureRandom();
     byte[] randomByteBuffer = new byte[8];
     random.nextBytes(randomByteBuffer);
     return Base64.getEncoder().encodeToString(randomByteBuffer);
