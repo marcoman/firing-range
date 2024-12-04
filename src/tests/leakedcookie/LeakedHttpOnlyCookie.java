@@ -18,6 +18,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.net.HttpHeaders;
 import com.google.testing.security.firingrange.utils.Responses;
 import com.google.testing.security.firingrange.utils.Templates;
+import io.github.pixee.security.Newlines;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.Optional;
@@ -46,7 +47,7 @@ public class LeakedHttpOnlyCookie extends HttpServlet {
     switch (pathInfo) {
       case "leakedcookie":
         response.setHeader(
-            HttpHeaders.SET_COOKIE, String.format("%s=%s; HttpOnly", COOKIE_NAME, cookieValue));
+            HttpHeaders.SET_COOKIE, Newlines.stripAll(String.format("%s=%s; HttpOnly", COOKIE_NAME, cookieValue)));
         Responses.sendNormalPage(
             response,
             Templates.getTemplate(BASE_TEMPLATE, this.getClass())
@@ -54,7 +55,7 @@ public class LeakedHttpOnlyCookie extends HttpServlet {
         break;
       case "leakedinresource":
         response.setHeader(
-            HttpHeaders.SET_COOKIE, String.format("%s=%s; HttpOnly", COOKIE_NAME, cookieValue));
+            HttpHeaders.SET_COOKIE, Newlines.stripAll(String.format("%s=%s; HttpOnly", COOKIE_NAME, cookieValue)));
         Responses.sendNormalPage(
             response, Templates.getTemplate(RESOURCE_TEMPLATE, this.getClass()));
         break;
