@@ -71,9 +71,9 @@ public class ServersideEscape extends HttpServlet {
       return;
     }
 
-    if (path[0].equals("escapeHtml")) {
+    if ("escapeHtml".equals(path[0])) {
       Responses.sendXssed(response, Templates.replacePayload(template, htmlEscape(echoedParam)));
-    } else if (path[0].equals("encodeUrl")) {
+    } else if ("encodeUrl".equals(path[0])) {
       Responses.sendXssed(response, Templates.replacePayload(template, encodeURL(echoedParam)));
     } else {
       Responses.sendError(response, "Unrecognized escaper", 400);
